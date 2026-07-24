@@ -1,0 +1,301 @@
+/* ==========================================================================
+   FLAT LAYOUT WITH TILED GRID BACKGROUND - MAXIMÍDIA DASHBOARD V3
+   ========================================================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-sans);
+    color: var(--text-body);
+    background-color: var(--bg-base);
+    min-height: 100vh;
+    line-height: 1.5;
+    transition: background var(--transition-normal), color var(--transition-normal);
+    overflow-x: hidden;
+
+    /* FUNDO COM GRADIENTE E PADRONAGEM DE LADRILHO (TILED GEOMETRIC GRID) */
+    background-image: 
+        linear-gradient(to right, var(--bg-tile-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--bg-tile-line) 1px, transparent 1px),
+        radial-gradient(at 0% 0%, rgba(37, 99, 235, 0.06) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(8, 145, 178, 0.05) 0px, transparent 50%);
+    background-size: 32px 32px, 32px 32px, 100% 100%, 100% 100%;
+}
+
+/* SPLASH SCREEN LOADER */
+#appSplashLoader {
+    position: fixed;
+    inset: 0;
+    background: #0f172a;
+    z-index: 9999;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+
+#appSplashLoader.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+.splash-logo {
+    height: 52px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    animation: logoPulse 1.8s infinite ease-in-out;
+}
+
+.splash-tagline {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(148, 163, 184, 0.7);
+}
+
+.splash-loader-bar {
+    width: 200px;
+    height: 3px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.splash-loader-progress {
+    width: 0%;
+    height: 100%;
+    background: linear-gradient(90deg, #2563eb, #0891b2, #059669);
+    border-radius: 10px;
+    animation: fillLoader 1.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+@keyframes logoPulse {
+    0%, 100% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.04); opacity: 0.85; }
+}
+
+@keyframes fillLoader {
+    to { width: 100%; }
+}
+
+/* ESTRUTURA DASHBOARD FLAT */
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    min-height: 100vh;
+    opacity: 0;
+    animation: dashboardFadeIn 0.5s 1.8s forwards ease-out;
+}
+
+@keyframes dashboardFadeIn {
+    to { opacity: 1; }
+}
+
+/* SIDEBAR DESKTOP FLAT */
+.sidebar {
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--sidebar-border);
+    padding: 24px 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    z-index: 100;
+}
+
+.sidebar-brand-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding: 0 6px;
+}
+
+.brand-logo {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+    filter: var(--sidebar-logo-filter, none);
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.sidebar-category {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--sidebar-category-text);
+    margin: 16px 0 6px 10px;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 11px 14px;
+    color: var(--sidebar-text);
+    text-decoration: none;
+    font-size: 13.5px;
+    font-weight: 600;
+    border-radius: 8px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    text-align: left;
+    transition: all var(--transition-fast);
+    width: 100%;
+}
+
+.nav-link i {
+    font-size: 15px;
+    width: 18px;
+    text-align: center;
+}
+
+.nav-link:hover {
+    background: var(--sidebar-hover-bg);
+    color: var(--sidebar-text-active);
+}
+
+.nav-link.active {
+    background: var(--sidebar-bg-active);
+    color: var(--sidebar-text-active);
+    font-weight: 700;
+}
+
+.sidebar-footer {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding-top: 16px;
+    border-top: 1px solid var(--sidebar-border);
+}
+
+.sidebar .btn-theme-toggle {
+    background: var(--sidebar-btn-surface);
+    border: 1px solid var(--sidebar-btn-border);
+    color: var(--sidebar-text);
+}
+
+.sidebar .btn-theme-toggle:hover {
+    background: var(--sidebar-btn-surface-hover);
+    color: var(--sidebar-text-active);
+}
+
+/* CONTEÚDO PRINCIPAL (FLAT DOCUMENT FLOW) */
+.main-content {
+    padding: 36px 48px;
+    overflow-y: auto;
+    max-width: 1240px;
+    width: 100%;
+    margin: 0 auto;
+    min-width: 0;
+}
+
+.main-header {
+    margin-bottom: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    border-bottom: 2px solid var(--border-flat);
+    padding-bottom: 20px;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.header-info h1 {
+    font-size: 26px;
+    font-weight: 800;
+    color: var(--text-heading);
+    margin-bottom: 4px;
+    letter-spacing: -0.02em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-info p {
+    color: var(--text-muted);
+    font-size: 14.5px;
+}
+
+/* OTIMIZAÇÃO E RESPONSIVIDADE MOBILE */
+.mobile-top-bar {
+    display: none;
+    background: var(--bg-surface);
+    border-bottom: 1px solid var(--border-flat);
+    padding: 12px 18px;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 110;
+}
+
+.mobile-bottom-nav {
+    position: fixed;
+    bottom: 16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 24px);
+    max-width: 480px;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-strong);
+    border-radius: 30px;
+    display: none;
+    justify-content: space-around;
+    padding: 4px;
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.mobile-nav-btn {
+    background: none;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 9.5px;
+    font-weight: 700;
+    color: var(--text-muted);
+    padding: 8px 10px;
+    cursor: pointer;
+    border-radius: 20px;
+    font-family: inherit;
+    transition: all var(--transition-fast);
+}
+
+.mobile-nav-btn.active {
+    color: var(--primary);
+    background: var(--primary-light);
+}
+
+.mobile-nav-btn:hover {
+    background: var(--bg-subtle);
+}
+
+@media (max-width: 992px) {
+    .dashboard-container { grid-template-columns: 1fr; }
+    .sidebar { display: none; }
+    .mobile-top-bar { display: flex; }
+    .mobile-bottom-nav { display: flex; }
+    .main-content { padding: 20px 16px 100px; }
+    body.dark-mode .mobile-brand-logo { filter: brightness(0) invert(1); }
+}

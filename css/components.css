@@ -1,0 +1,519 @@
+/* ==========================================================================
+   FLAT COMPONENTS & USEFUL TOOLS - MAXIMÍDIA DASHBOARD V3
+   ========================================================================== */
+
+/* SEÇÃO FLAT DOCUMENT FLOW (SUBSTITUI CARDS ISOLADOS) */
+.flat-section {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-flat);
+    border-radius: 12px;
+    padding: 24px 28px;
+    margin-bottom: 24px;
+    transition: border-color var(--transition-fast);
+}
+
+.flat-section:hover {
+    border-color: var(--border-strong);
+}
+
+.flat-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border-flat);
+    padding-bottom: 14px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.flat-title {
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--text-heading);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.01em;
+}
+
+.flat-title i {
+    color: var(--primary);
+    font-size: 20px;
+}
+
+/* BOTÕES PDF & IMPRESSÃO */
+.pdf-action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-flat);
+    border-radius: 10px;
+    padding: 14px 20px;
+    margin-bottom: 20px;
+}
+
+.btn-pdf-download {
+    background: var(--primary);
+    color: var(--btn-text-on-primary);
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+}
+.btn-pdf-download:hover { background: var(--primary-hover); }
+
+.btn-print {
+    background: var(--btn-secondary-bg);
+    color: var(--btn-text-on-primary);
+    border: none;
+    padding: 9px 18px;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 13.5px;
+    cursor: pointer;
+    transition: background var(--transition-fast);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+.btn-print:hover { background: var(--btn-secondary-hover); }
+
+.btn-theme-toggle {
+    background: var(--btn-surface);
+    border: 1px solid var(--btn-border);
+    color: var(--text-body);
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all var(--transition-fast);
+}
+.btn-theme-toggle:hover { background: var(--btn-surface-hover); }
+
+/* BADGES DE FREQUÊNCIA WI-FI & ESTADO */
+.badge {
+    font-size: 11px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 10px;
+    border-radius: 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.badge-wifi-2g { background: var(--warning-light); color: var(--warning); border: 1px solid rgba(217, 119, 6, 0.3); }
+.badge-wifi-5g { background: var(--cyan-light); color: var(--cyan); border: 1px solid rgba(8, 145, 178, 0.3); }
+.badge-wifi-6 { background: var(--primary-light); color: var(--primary); border: 1px solid rgba(37, 99, 235, 0.3); }
+
+.badge-success { background: var(--success-light); color: var(--success); border: 1px solid rgba(5, 150, 105, 0.3); }
+.badge-warning { background: var(--warning-light); color: var(--warning); border: 1px solid rgba(217, 119, 6, 0.3); }
+.badge-danger { background: var(--danger-light); color: var(--danger); border: 1px solid rgba(220, 38, 38, 0.3); }
+.badge-primary { background: var(--primary-light); color: var(--primary); border: 1px solid rgba(37, 99, 235, 0.3); }
+
+/* --------------------------------------------------------------------------
+   CALCULADORA DE SINAL ÓPTICO (RX POWER GAUGE METER FLAT)
+   -------------------------------------------------------------------------- */
+.optical-meter-box {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-flat);
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 14px;
+}
+
+.optical-input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.optical-value-display {
+    font-family: var(--font-mono);
+    font-size: 28px;
+    font-weight: 800;
+    color: var(--text-heading);
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+}
+
+.optical-value-display span { font-size: 14px; color: var(--text-muted); font-weight: 600; }
+
+.optical-spectrum-track {
+    position: relative;
+    height: 14px;
+    background: linear-gradient(90deg, 
+        #dc2626 0%,      /* -35 dBm a -27 dBm */
+        #d97706 35%,     /* -27 dBm a -24.5 dBm */
+        #059669 55%,     /* -24.5 dBm a -15 dBm */
+        #d97706 80%,     /* -15 dBm a -8 dBm */
+        #dc2626 100%     /* -8 dBm a 0 dBm */
+    );
+    border-radius: 20px;
+    margin: 24px 0 12px;
+}
+
+.optical-spectrum-pin {
+    position: absolute;
+    top: -7px;
+    left: 45%;
+    width: 28px;
+    height: 28px;
+    background: var(--bg-surface);
+    border: 3px solid var(--primary);
+    border-radius: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    transition: left 0.3s var(--transition-fast);
+}
+
+.optical-scale-labels {
+    display: flex;
+    justify-content: space-between;
+    font-family: var(--font-mono);
+    font-size: 10.5px;
+    color: var(--text-muted);
+    font-weight: 700;
+}
+
+/* TABELAS DE PARÂMETROS FLAT */
+.parameters-table {
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--border-flat);
+    background: var(--bg-surface);
+    margin-top: 14px;
+}
+
+.param-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+    padding: 11px 16px;
+    border-bottom: 1px solid var(--border-flat);
+    transition: background var(--transition-fast);
+}
+
+.param-row:last-child { border-bottom: none; }
+.param-row:hover { background: var(--primary-light); }
+
+@media (max-width: 768px) {
+    .param-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 12px;
+    }
+}
+
+.param-label {
+    font-size: 11.5px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    min-width: 165px;
+    letter-spacing: 0.04em;
+}
+
+@media (max-width: 768px) {
+    .param-label {
+        min-width: auto;
+    }
+}
+
+.param-value {
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--text-heading);
+    flex: 1;
+    min-width: 150px;
+    word-break: break-all;
+}
+
+.btn-copy {
+    background: transparent;
+    border: 1px solid var(--border-flat);
+    color: var(--text-muted);
+    cursor: pointer;
+    padding: 5px 12px;
+    border-radius: 6px;
+    transition: all var(--transition-fast);
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.btn-copy:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+    background: var(--primary-light);
+}
+
+.btn-copy.copied {
+    color: var(--success) !important;
+    border-color: var(--success) !important;
+    background: var(--success-light) !important;
+}
+
+/* ABAS DE MODELO RESPONSIVAS E FLEXÍVEIS */
+.model-selector-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 22px;
+}
+
+.model-tab-btn {
+    background: var(--bg-surface);
+    border: 1px solid var(--border-flat);
+    color: var(--text-body);
+    padding: 9px 16px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all var(--transition-fast);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.model-tab-btn:hover { background: var(--hover-bg-subtle); border-color: var(--border-strong); }
+.model-tab-btn.active {
+    background: var(--primary);
+    color: var(--btn-text-on-primary);
+    border-color: var(--primary);
+}
+
+/* CAMINHOS DE MENU (PATH) */
+.path {
+    font-family: var(--font-mono);
+    font-size: 12px;
+    background: var(--primary-light);
+    color: var(--primary);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 600;
+    border: 1px solid rgba(37, 99, 235, 0.15);
+    display: inline-block;
+    word-break: break-all;
+    max-width: 100%;
+}
+
+/* STEPS E LISTAS */
+.step-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    list-style: none;
+}
+
+.step-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.step-num {
+    flex-shrink: 0;
+    width: 30px;
+    height: 30px;
+    background: var(--primary);
+    color: var(--btn-text-on-primary);
+    font-weight: 800;
+    font-size: 13.5px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step-body { flex: 1; }
+.step-title { font-weight: 800; font-size: 15px; color: var(--text-heading); margin-bottom: 2px; }
+.step-desc { font-size: 14px; color: var(--text-muted); line-height: 1.5; }
+
+/* FORMULÁRIOS FLAT */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-bottom: 12px;
+}
+
+.form-label {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text-heading);
+}
+
+.form-input, .form-select {
+    padding: 9px 12px;
+    border-radius: 8px;
+    border: 1px solid var(--border-flat);
+    background: var(--bg-input);
+    color: var(--text-heading);
+    font-family: inherit;
+    font-size: 13.5px;
+    outline: none;
+    transition: border-color var(--transition-fast);
+}
+
+.form-input:focus, .form-select:focus {
+    border-color: var(--border-focus);
+}
+
+/* TOAST BANNER */
+.toast-banner {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    background: var(--bg-sidebar);
+    color: var(--text-body);
+    padding: 12px 20px;
+    border-radius: 10px;
+    font-size: 13.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-flat);
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all var(--transition-fast);
+    z-index: 2000;
+    pointer-events: none;
+}
+.toast-banner.show { opacity: 1; transform: translateY(0); }
+
+/* IMPRESSÃO LIMPA */
+
+.tab-section {
+    display: none;
+}
+
+.tab-section.active {
+    display: block;
+}
+
+@media print {
+    .sidebar, .mobile-bottom-nav, .mobile-top-bar, .pdf-action-bar, .btn-copy, .model-selector-tabs { display: none !important; }
+    .dashboard-container { grid-template-columns: 1fr !important; }
+    .main-content { padding: 0 !important; max-width: 100% !important; }
+    .tab-section { display: block !important; page-break-inside: avoid; border-bottom: 2px dashed #ccc; margin-bottom: 30px; padding-bottom: 20px; }
+    .model-content-pane { display: block !important; }
+}
+
+/* Accordion Styles */
+.accordion-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg-surface);
+    border: 1px solid var(--border-flat);
+    padding: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 14.5px;
+    color: var(--text-heading);
+    transition: background 0.2s;
+    margin-top: 10px;
+}
+.accordion-header:hover { background: var(--hover-bg-subtle); }
+
+/* ACESSIBILIDADE: FOCUS RING PARA ELEMENTOS INTERATIVOS */
+.nav-link:focus-visible,
+.btn-pdf-download:focus-visible,
+.btn-print:focus-visible,
+.btn-theme-toggle:focus-visible,
+.btn-copy:focus-visible,
+.model-tab-btn:focus-visible,
+.mobile-nav-btn:focus-visible,
+.form-input:focus-visible,
+.form-select:focus-visible,
+.accordion-header:focus-visible {
+    outline: 2px solid var(--border-focus);
+    outline-offset: 2px;
+}
+
+/* PLACEHOLDER COM CONTRASTE adequado */
+.form-input::placeholder,
+.form-select::placeholder {
+    color: var(--text-muted);
+    opacity: 0.8;
+}
+
+/* BORDAS COM CONTRASTE MELHORADO para badges */
+.badge-success { background: var(--success-light); color: var(--success); border: 1px solid var(--success); border-opacity: 0.3; }
+.badge-warning { background: var(--warning-light); color: var(--warning); border: 1px solid var(--warning); border-opacity: 0.3; }
+.badge-danger { background: var(--danger-light); color: var(--danger); border: 1px solid var(--danger); border-opacity: 0.3; }
+.badge-primary { background: var(--primary-light); color: var(--primary); border: 1px solid var(--primary); border-opacity: 0.3; }
+
+/* SCROLLBAR PERSONALIZADA */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 10px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* REDUÇÃO DE MOTION para acessibilidade */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    #appSplashLoader { display: none !important; }
+    .dashboard-container { opacity: 1 !important; animation: none !important; }
+}
+
+/* ESTADOS DESABILITADOS */
+.btn-pdf-download:disabled,
+.btn-print:disabled,
+.btn-copy:disabled,
+.form-input:disabled,
+.form-select:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+.accordion-content {
+    display: none;
+    padding: 16px;
+    background: var(--bg-subtle);
+    border: 1px solid var(--border-flat);
+    border-top: none;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+    margin-bottom: 10px;
+}
+.accordion-content.active { display: block; }
