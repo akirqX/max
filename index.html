@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Portal de Operações & Documentação Técnica · MaxiMídia</title>
+
+    <!-- Fontes Google - Inter & JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet" />
+
+    <!-- Font Awesome 6 para ícones -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!-- Estilos CSS Modularizados (V3 Flat Layout + Tiled Background) -->
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/components.css" />
+</head>
+
+<body>
+
+    <!-- ANIMAÇÃO DE ABERTURA DO SITE (SPLASH SCREEN LOADER) -->
+    <div id="appSplashLoader">
+        <img src="https://maximidia.net.br/wp-content/uploads/2022/08/MARCA-MAXIMIDIA-1-e1712173845190-1536x403.png" alt="MaxiMídia" class="splash-logo" />
+        <span class="splash-tagline">Carregando painel...</span>
+        <div class="splash-loader-bar">
+            <div class="splash-loader-progress"></div>
+        </div>
+    </div>
+
+    <!-- BARRA SUPERIOR MOBILE -->
+    <header class="mobile-top-bar">
+        <img src="https://maximidia.net.br/wp-content/uploads/2022/08/MARCA-MAXIMIDIA-1-e1712173845190-1536x403.png" alt="MaxiMídia" class="mobile-brand-logo" style="height: 26px;" />
+        <button class="btn-theme-toggle" id="mobileThemeBtn"><i class="fas fa-moon"></i></button>
+    </header>
+
+    <div class="dashboard-container">
+
+        <!-- SIDEBAR DE NAVEGAÇÃO DESKTOP -->
+        <aside class="sidebar">
+            <div class="sidebar-top">
+                <div class="sidebar-brand-box">
+                    <img src="https://maximidia.net.br/wp-content/uploads/2022/08/MARCA-MAXIMIDIA-1-e1712173845190-1536x403.png" alt="MaxiMídia" class="brand-logo" />
+                </div>
+
+                <nav class="sidebar-nav">
+                    <span class="sidebar-category">DOCUMENTAÇÃO TÉCNICA</span>
+                    <button class="nav-link active" data-tab="tab-tr069">
+                        <i class="fas fa-sliders-h"></i> Guia Parâmetros TR-069
+                    </button>
+                    
+                    <span class="sidebar-category">SUPORTE TÉCNICO</span>
+                    <button class="nav-link" data-tab="tab-suporte">
+                        <i class="fas fa-headset"></i> Tutoriais & Wi-Fi Dual Band
+                    </button>
+
+                    <span class="sidebar-category">PROVEDOR IXC ERP</span>
+                    <button class="nav-link" data-tab="tab-provedor">
+                        <i class="fas fa-network-wired"></i> Autorização de ONUs
+                    </button>
+
+                    <span class="sidebar-category">FERRAMENTAS ÚTEIS</span>
+                    <button class="nav-link" data-tab="tab-calculadora">
+                        <i class="fas fa-tools"></i> Calculadoras Ópticas & IP
+                    </button>
+                </nav>
+            </div>
+
+            <div class="sidebar-footer">
+                <button class="btn-theme-toggle" id="themeToggleBtn">
+                    <i class="fas fa-moon"></i> Alternar Tema
+                </button>
+            </div>
+        </aside>
+
+        <!-- ÁREA PRINCIPAL DE CONTEÚDO -->
+        <main class="main-content">
+
+            <!-- CABEÇALHO DA PÁGINA -->
+            <header class="main-header">
+                <div class="header-info">
+                    <h1 id="sectionTitle"><i class="fas fa-sliders-h" style="color: var(--primary);"></i> Parâmetros & Guia TR-069</h1>
+                    <p id="sectionSubtitle">Especificações de gerência unificada por modelo de ONT e Roteador.</p>
+                </div>
+            </header>
+
+            <!-- ===================================================================
+                 SEÇÃO 1: GUIA DE PARÂMETROS TR-069 POR MODELO
+                 =================================================================== -->
+            <section id="tab-tr069" class="tab-section active">
+                
+                <!-- BARRA DE AÇÕES: BAIXAR PDF E IMPRIMIR GUIA -->
+                <div class="pdf-action-bar">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-file-pdf" style="font-size: 22px; color: var(--danger);"></i>
+                        <div>
+                            <strong style="font-size: 14.5px; color: var(--text-heading);">Manual Técnico Oficial TR-069</strong>
+                            <p style="font-size: 13px; color: var(--text-muted);">Baixe o arquivo PDF original ou imprima o guia estruturado.</p>
+                        </div>
+                    </div>
+                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <button class="btn-pdf-download" id="btnDownloadPdf"><i class="fas fa-download"></i> Baixar Manual PDF</button>
+                        <button class="btn-print" id="btnPrintGuide"><i class="fas fa-print"></i> Imprimir Guia</button>
+                    </div>
+                </div>
+
+                <!-- Alerta Global de Pré-requisitos (Renderizado via JS) -->
+                <div id="tr069GlobalAlert"></div>
+
+                <!-- Abas dos Modelos de Equipamentos -->
+                <div class="model-selector-tabs" id="tr069ModelTabs"></div>
+
+                <!-- Conteúdo dos Modelos (Renderizado via JS em Flat Layout) -->
+                <div id="tr069ModelContent"></div>
+
+            </section>
+
+            <!-- ===================================================================
+                 SEÇÃO 2: TUTORIAIS DE SUPORTE TÉCNICO & WI-FI DUAL BAND (2.4G vs 5G)
+                 =================================================================== -->
+            <section id="tab-suporte" class="tab-section">
+
+                <!-- GUIA COMPARATIVO WI-FI 2.4GHZ VS 5GHZ (Renderizado via JS) -->
+                <div id="wifiBandGuideContainer"></div>
+
+                <!-- SIMULADOR INTERATIVO / ÁRVORE DE DECISÃO -->
+                <div class="flat-section" style="border-left: 4px solid var(--primary);">
+                    <div class="flat-header-row">
+                        <h3 class="flat-title"><i class="fas fa-magic"></i> Simulador Interativo de Triagem do Suporte</h3>
+                    </div>
+                    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">
+                        Selecione o sintoma observado para gerar o diagnóstico imediato de atendimento:
+                    </p>
+                    <div class="form-group">
+                        <label class="form-label" for="wizardSymptomSelect">Sintoma Relatado:</label>
+                        <select id="wizardSymptomSelect" class="form-select" style="width: 100%; padding: 10px; font-size: 13.5px;">
+                            <option value="">-- Selecione uma situação de suporte --</option>
+                            <option value="wifi-slow">Lentidão / Teste abaixo do contratado no Wi-Fi (2.4GHz Preso)</option>
+                            <option value="los-red">Luz LOS vermelha acesa / Rompimento de cabo drop</option>
+                            <option value="pon-flash">Luz PON piscando constantemente</option>
+                            <option value="mac-lock">Erro de Autenticação PPPoE / Trava de MAC (Port-Limit-Reached)</option>
+                        </select>
+                    </div>
+
+                    <div id="wizardOutput" style="display: none;"></div>
+                </div>
+
+                <!-- LISTA DIVERSIFICADA DE TUTORIAIS DE SUPORTE (Renderizado via JS) -->
+                <div id="supportScenariosContainer"></div>
+
+            </section>
+
+            <!-- ===================================================================
+                 SEÇÃO 3: PROVEDOR IXC ERP (ROTEIRO DE AUTORIZAÇÃO)
+                 =================================================================== -->
+            <section id="tab-provedor" class="tab-section">
+
+                <!-- ROTEIRO IXC ERP (Renderizado via JS) -->
+                <div id="ixcAuthorizationContainer"></div>
+
+            </section>
+
+            <!-- ===================================================================
+                 SEÇÃO 4: NOVAS FERRAMENTAS ÚTEIS DE VERDADE
+                 =================================================================== -->
+            <section id="tab-calculadora" class="tab-section">
+
+                <!-- 1. CALCULADORA DE ATENUAÇÃO E ORÇAMENTO DE ENLACE ÓPTICO (LINK BUDGET) -->
+                <div class="flat-section">
+                    <div class="flat-header-row">
+                        <h3 class="flat-title"><i class="fas fa-network-wired" style="color: var(--cyan);"></i> Calculadora de Orçamento de Enlace Óptico (Link Budget GPON)</h3>
+                        <span class="badge badge-wifi-5g">Rede Óptica</span>
+                    </div>
+                    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 16px;">
+                        Calcule a perda de inserção total (dB) da OLT até a casa do cliente somando fibra, fusões, conectores e splitters:
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 16px;">
+                        <div class="form-group">
+                            <label class="form-label" for="budgetOltTx">Potência TX OLT (dBm):</label>
+                            <input type="number" step="0.5" id="budgetOltTx" class="form-input" value="5.0" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="budgetDistance">Distância da Fibra (km):</label>
+                            <input type="number" step="0.1" id="budgetDistance" class="form-input" value="3.5" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="budgetFusions">Nº de Fusões / Emendas:</label>
+                            <input type="number" id="budgetFusions" class="form-input" value="4" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="budgetConnectors">Nº de Conectores SC/APC:</label>
+                            <input type="number" id="budgetConnectors" class="form-input" value="4" />
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="budgetSplitter">Razão do Splitter Óptico:</label>
+                            <select id="budgetSplitter" class="form-select">
+                                <option value="0">Sem Splitter (0 dB)</option>
+                                <option value="3.5">Splitter 1:2 (-3.5 dB)</option>
+                                <option value="7.2">Splitter 1:4 (-7.2 dB)</option>
+                                <option value="10.5">Splitter 1:8 (-10.5 dB)</option>
+                                <option value="13.8">Splitter 1:16 (-13.8 dB)</option>
+                                <option value="17.2" selected>Splitter 1:32 (-17.2 dB)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div style="background: var(--bg-subtle); padding: 16px; border-radius: 10px; border: 1px solid var(--border-flat); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 14px;">
+                        <div>
+                            <span style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Perda Total de Inserção:</span>
+                            <div id="budgetResultLoss" style="font-family: var(--font-mono); font-size: 22px; font-weight: 800; color: var(--text-heading);">19.93 dB</div>
+                        </div>
+                        <div>
+                            <span style="font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase;">Sinal Previsto na ONT:</span>
+                            <div id="budgetResultRx" style="font-family: var(--font-mono); font-size: 22px; font-weight: 800; color: var(--primary);">-14.93 dBm</div>
+                        </div>
+                        <div>
+                            <span id="budgetResultBadge" class="badge badge-success">Sinal Previsto Ótimo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. CALCULADORA DE SUB-REDE IP & VALIDADOR DE TRUSTED SUBNET -->
+                <div class="flat-section">
+                    <div class="flat-header-row">
+                        <h3 class="flat-title"><i class="fas fa-calculator" style="color: var(--primary);"></i> Calculadora de Sub-rede IP & Validador Trusted Subnet</h3>
+                        <span class="badge badge-primary">Faixa 179.108.128.1 - 64</span>
+                    </div>
+                    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 14px;">
+                        Digite um IP ou IP/CIDR (ex: <code>179.108.128.15/26</code>) para calcular a rede, broadcast, hosts úteis e validar a sub-rede confiável de gerência TR-069:
+                    </p>
+
+                    <div style="display: flex; gap: 10px; margin-bottom: 14px; flex-wrap: wrap;">
+                        <input type="text" id="calcIpAddress" class="form-input" style="flex: 1; min-width: 220px;" placeholder="Ex: 179.108.128.15/26" value="179.108.128.15/26" />
+                        <button class="btn-pdf-download" id="btnCalcIp"><i class="fas fa-search"></i> Calcular Sub-rede</button>
+                    </div>
+
+                    <div id="calcIpOutput" style="background: var(--bg-subtle); padding: 14px; border-radius: 8px; border: 1px solid var(--border-flat);">
+                        <span class="badge badge-success"><i class="fas fa-shield-alt"></i> IP Pertence à Faixa Confiável TR-069 MaxiMídia (179.108.128.1 - 64)</span>
+                    </div>
+                </div>
+
+                <!-- 3. MEDIDOR COM RÉGUA DE SINAL ÓPTICO RX (DBM) -->
+                <div class="flat-section">
+                    <div class="flat-header-row">
+                        <h3 class="flat-title"><i class="fas fa-tachometer-alt" style="color: var(--primary);"></i> Avaliador de Potência Óptica RX (dBm)</h3>
+                    </div>
+                    <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 14px;">
+                        Insira o valor lido na ONT ou na OLT para verificar a atenuação na régua visual:
+                    </p>
+
+                    <div class="optical-meter-box">
+                        <div class="optical-input-wrapper">
+                            <div style="flex: 1; min-width: 180px;">
+                                <label style="font-size: 13px; font-weight: 700; color: var(--text-heading); display: block; margin-bottom: 4px;" for="opticalInputDbm">Potência RX (dBm):</label>
+                                <input type="number" step="0.1" id="opticalInputDbm" class="form-input" value="-21.5" style="font-size: 18px; font-weight: 700; padding: 10px 14px; width: 100%; font-family: var(--font-mono);" />
+                            </div>
+
+                            <div>
+                                <div class="optical-value-display">
+                                    <span id="opticalValueNum">-21.5</span>
+                                    <span>dBm</span>
+                                </div>
+                                <span id="opticalStatusBadge" class="badge badge-success" style="margin-top: 2px;">Excelente (Sinal Ideal)</span>
+                            </div>
+                        </div>
+
+                        <div class="optical-spectrum-track">
+                            <div class="optical-spectrum-pin" id="opticalSpectrumPin"></div>
+                        </div>
+
+                        <div class="optical-scale-labels">
+                            <span>-35 dBm</span>
+                            <span>-27 dBm</span>
+                            <span>-24.5 dBm</span>
+                            <span>-15 dBm</span>
+                            <span>0 dBm</span>
+                        </div>
+
+                        <div id="opticalDiagnosisDesc" style="margin-top: 16px; font-size: 13.5px; color: var(--text-heading); background: var(--bg-surface); padding: 12px; border-radius: 8px; border: 1px solid var(--border-flat); display: flex; align-items: center; gap: 8px;">
+                            <i class="fas fa-check-circle" style="color: var(--success);"></i> Potência óptima de operação (-15 a -24.5 dBm). Fibra e conectores em ótimo estado.
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+    </div>
+
+    <!-- NAVEGAÇÃO INFERIOR MOBILE -->
+    <nav class="mobile-bottom-nav">
+        <button class="mobile-nav-btn active" data-tab="tab-tr069">
+            <i class="fas fa-sliders-h"></i>
+            <span>TR-069</span>
+        </button>
+        <button class="mobile-nav-btn" data-tab="tab-suporte">
+            <i class="fas fa-headset"></i>
+            <span>Suporte</span>
+        </button>
+        <button class="mobile-nav-btn" data-tab="tab-provedor">
+            <i class="fas fa-network-wired"></i>
+            <span>Provedor</span>
+        </button>
+        <button class="mobile-nav-btn" data-tab="tab-calculadora">
+            <i class="fas fa-tools"></i>
+            <span>Ferramentas</span>
+        </button>
+    </nav>
+
+    <!-- NOTIFICAÇÃO TOAST BANNER -->
+    <div class="toast-banner" id="globalToast">
+        <i class="fas fa-check-circle" style="color: var(--success);"></i>
+        <span id="globalToastMsg">Copiado com sucesso!</span>
+    </div>
+
+    <!-- MÓDULOS JAVASCRIPT DE DADOS E LÓGICA -->
+    <script src="js/data/tr069-data.js"></script>
+    <script src="js/data/scenarios-data.js"></script>
+
+    <script src="js/modules/theme.js"></script>
+    <script src="js/modules/tabs.js"></script>
+    <script src="js/modules/tr069-guide.js"></script>
+    <script src="js/modules/troubleshooter.js"></script>
+    <script src="js/modules/calculators.js"></script>
+
+    <!-- PONTO DE ENTRADA PRINCIPAL -->
+    <script src="js/app.js"></script>
+</body>
+
+</html>
